@@ -1,0 +1,6 @@
+CREATE TABLE url
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    createdAt TIMESTAMP
+)

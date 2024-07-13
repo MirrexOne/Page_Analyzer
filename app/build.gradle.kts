@@ -6,6 +6,7 @@ plugins {
     checkstyle
     id("java")
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.freefair.lombok") version "8.6"
 }
 
 application {
@@ -21,6 +22,7 @@ repositories {
 
 dependencies {
     implementation("com.h2database:h2:2.2.224")
+    implementation("org.postgresql:postgresql:42.7.2")
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     implementation("org.apache.commons:commons-text:1.11.0")
