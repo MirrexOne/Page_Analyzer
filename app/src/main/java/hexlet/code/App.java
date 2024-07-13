@@ -13,19 +13,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static hexlet.code.util.Utils.getDataBaseUrl;
+import static hexlet.code.util.Utils.getPort;
 import static hexlet.code.util.Utils.readResourceFile;
 
 @Slf4j
 public class App {
     public static void main(String[] args) throws SQLException, IOException {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(getPort());
 
     }
 
     public static Javalin getApp() throws SQLException, IOException {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:h2:mem:project;DB_CLOSE_DELAY=-1");
+        hikariConfig.setJdbcUrl(getDataBaseUrl());
 
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         String sql = readResourceFile("schema.sql");
