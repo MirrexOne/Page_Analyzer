@@ -22,4 +22,9 @@ public class Utils {
         String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.valueOf(port);
     }
+
+    public static String getDataBaseUrl() {
+        return System.getenv()
+                .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1");
+    }
 }
