@@ -27,4 +27,8 @@ public class Utils {
         return System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1");
     }
+
+    public static String getDataBasePassword() {
+        return System.getenv().getOrDefault("PASSWORD", "");
+    }
 }
