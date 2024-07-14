@@ -19,7 +19,7 @@ public class Utils {
     }
 
     public static int getPort() {
-        String port = System.getenv().getOrDefault("PORT", "7070");
+        String port = System.getenv().getOrDefault("DB_PORT", "7070");
         return Integer.valueOf(port);
     }
 
