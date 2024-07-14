@@ -31,4 +31,8 @@ public class Utils {
     public static String getDataBasePassword() {
         return System.getenv().getOrDefault("PASSWORD", "");
     }
+
+    public static String getDataBaseUsername() {
+        return System.getenv().getOrDefault("USERNAME", "");
+    }
 }

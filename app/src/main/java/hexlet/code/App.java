@@ -13,7 +13,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static hexlet.code.util.Utils.getDataBasePassword;
 import static hexlet.code.util.Utils.getDataBaseUrl;
+import static hexlet.code.util.Utils.getDataBaseUsername;
 import static hexlet.code.util.Utils.getPort;
 import static hexlet.code.util.Utils.readResourceFile;
 
@@ -28,6 +30,8 @@ public class App {
     public static Javalin getApp() throws SQLException, IOException {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(getDataBaseUrl());
+        hikariConfig.setUsername(getDataBaseUsername());
+        hikariConfig.setPassword(getDataBasePassword());
 
 
         HikariDataSource dataSource = new HikariDataSource(hikariConfig);
