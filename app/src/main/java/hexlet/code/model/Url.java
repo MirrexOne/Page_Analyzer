@@ -2,10 +2,8 @@ package hexlet.code.model;
 
 import java.sql.Timestamp;
 
-/**
- * To-do
- */
-public class Url {
+
+public final class Url {
 
     private Long id;
     private String name;
