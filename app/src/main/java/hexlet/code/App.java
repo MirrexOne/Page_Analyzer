@@ -55,6 +55,7 @@ public class App {
         });
 
         app.get(NamedRoutes.rootPath(), UrlController::root);
+        app.get(NamedRoutes.pathToSites(), UrlController::show);
 
         return app;
     }
