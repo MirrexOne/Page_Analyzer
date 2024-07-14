@@ -5,6 +5,6 @@ import io.javalin.http.Context;
 public class UrlController {
 
     public static void root(Context context) {
-        context.render("mainPage.jte");
+        context.render("search.jte");
     }
 }

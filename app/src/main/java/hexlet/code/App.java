@@ -37,13 +37,14 @@ public class App {
         hikariConfig.setPassword(getDataBasePassword());
 
 
-        HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-        String sql = readResourceFile("schema.sql");
+        try (HikariDataSource dataSource = new HikariDataSource(hikariConfig)) {
+            String sql = readResourceFile("schema.sql");
 
-        log.info(sql);
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            statement.execute(sql);
+            log.info(sql);
+            try (Connection connection = dataSource.getConnection();
+                 Statement statement = connection.createStatement()) {
+                statement.execute(sql);
+            }
         }
 
 
