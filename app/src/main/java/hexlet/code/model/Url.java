@@ -2,7 +2,9 @@ package hexlet.code.model;
 
 import java.sql.Timestamp;
 
-
+/**
+ * To-do
+ */
 public class Url {
 
     private Long id;
@@ -44,10 +46,14 @@ public class Url {
 
     @Override
     public String toString() {
-        return "Url{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", createdAt=" + createdAt +
+        return "Url{"
+                +
+                "id=" + id
+                +
+                ", name='" + name + '\''
+                +
+                ", createdAt=" + createdAt
+                +
                 '}';
     }
 }
