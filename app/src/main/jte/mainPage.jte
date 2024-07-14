@@ -64,7 +64,7 @@
     <div class="container-xl">
         <div class="text-center">
             created by
-            <a href="https://ru.hexlet.io" target="_blank">Hexlet</a>
+            <a href="https://github.com/MirrexOne" target="_blank">Mirrex</a>
         </div>
     </div>
 </footer>
