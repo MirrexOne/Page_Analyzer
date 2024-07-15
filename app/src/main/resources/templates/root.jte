@@ -1,5 +1,8 @@
 @import gg.jte.Content
+@import hexlet.code.dto.BasePage
+@import hexlet.code.rout.NamedRoutes
 @param Content content
+@param BasePage page = null
 
 <!DOCTYPE html>
 <html>
@@ -24,14 +27,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav">
-                <a class="nav-link" href="/">Главная</a>
-                <a class="nav-link" href="/urls">Сайты</a>
+                <a class="nav-link" href="${NamedRoutes.rootPath()}">Главная</a>
+                <a class="nav-link" href="${NamedRoutes.pathToSites()}">Сайты</a>
             </div>
         </div>
     </div>
 </nav>
 
 <main class="flex-grow-1">
+
+    @if(page != null && page.getFlash() != null)
+        <div class="alert alert-${page.getFlashType()}" role="alert">
+            ${page.getFlash()}
+        </div>
+    @endif
 
     ${content}
 

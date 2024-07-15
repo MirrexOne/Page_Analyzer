@@ -1,3 +1,6 @@
+@import hexlet.code.dto.urls.UrlsPage
+@param UrlsPage page
+
 @template.root(
 content = @`
     <section>
@@ -15,8 +18,25 @@ content = @`
                 </tr>
                 </thead>
                 <tbody>
+                @for(var url : page.getUrls())
+                <tr>
+                    <td>
+                        ${url.getId()}
+                    </td>
+                    <td>
+                        <a>${url.getName()}</a>
+                    </td>
+                    <td>
+                        ${String.valueOf(url.getCreatedAt())}
+                    </td>
+                    <td>
+
+                    </td>
+
+                </tr>
 
                 </tbody>
+                @endfor
             </table>
         </div>
 

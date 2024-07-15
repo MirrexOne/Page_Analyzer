@@ -2,7 +2,6 @@ package hexlet.code.model;
 
 import java.sql.Timestamp;
 
-
 public final class Url {
 
     private Long id;
@@ -40,18 +39,5 @@ public final class Url {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Url{"
-                +
-                "id=" + id
-                +
-                ", name='" + name + '\''
-                +
-                ", createdAt=" + createdAt
-                +
-                '}';
     }
 }

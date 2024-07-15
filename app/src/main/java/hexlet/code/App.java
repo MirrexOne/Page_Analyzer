@@ -6,6 +6,7 @@ import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
 import hexlet.code.controller.UrlController;
+import hexlet.code.repository.BaseRepository;
 import hexlet.code.rout.NamedRoutes;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
@@ -37,16 +38,17 @@ public class App {
         hikariConfig.setPassword(getDataBasePassword());
 
 
-        try (HikariDataSource dataSource = new HikariDataSource(hikariConfig)) {
-            String sql = readResourceFile("schema.sql");
+        HikariDataSource dataSource = new HikariDataSource(hikariConfig);
+        String sql = readResourceFile("schema.sql");
 
-            log.info(sql);
-            try (Connection connection = dataSource.getConnection();
-                 Statement statement = connection.createStatement()) {
-                statement.execute(sql);
-            }
+
+        log.info(sql);
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
         }
 
+        BaseRepository.dataSource = dataSource;
 
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
@@ -54,8 +56,9 @@ public class App {
 
         });
 
+        app.get(NamedRoutes.pathToSites(), UrlController::showAll);
+        app.post(NamedRoutes.pathToSites(), UrlController::create);
         app.get(NamedRoutes.rootPath(), UrlController::root);
-        app.get(NamedRoutes.pathToSites(), UrlController::show);
 
         return app;
     }

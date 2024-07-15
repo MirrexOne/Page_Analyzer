@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -34,5 +37,27 @@ public class Utils {
 
     public static String getDataBaseUsername() {
         return System.getenv().getOrDefault("USERNAME", "");
+    }
+
+    public static Timestamp formatTimestamp(Timestamp timestamp) {
+        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String formattedDateTime = localDateTime.format(formatter);
+
+        LocalDateTime parsedDateTime = LocalDateTime.parse(formattedDateTime, formatter);
+
+        return Timestamp.valueOf(parsedDateTime);
+    }
+
+    public static String getCurrentDateTime() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return now.format(formatter);
+    }
+
+    public static Timestamp getCurrentTimestamp() {
+        LocalDateTime now = LocalDateTime.now();
+        return Timestamp.valueOf(now);
     }
 }
