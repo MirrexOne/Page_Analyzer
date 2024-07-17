@@ -10,8 +10,6 @@ import static io.javalin.rendering.template.TemplateUtil.model;
 import java.sql.SQLException;
 import java.util.List;
 
-import static hexlet.code.util.Utils.getCurrentTimestamp;
-
 public class UrlController {
 
     public static void root(Context context) {
@@ -29,7 +27,7 @@ public class UrlController {
     public static void create(Context context) throws SQLException {
 
             String name = context.formParamAsClass("url", String.class).get();
-            Url url = new Url(name, getCurrentTimestamp());
+            Url url = new Url(name);
             UrlRepository.save(url);
             context.sessionAttribute("flash", "Page successfully added");
             context.sessionAttribute("flash-type", "success");

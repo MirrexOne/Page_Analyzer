@@ -39,21 +39,9 @@ public class Utils {
         return System.getenv().getOrDefault("USERNAME", "");
     }
 
-    public static Timestamp formatTimestamp(Timestamp timestamp) {
-        LocalDateTime localDateTime = timestamp.toLocalDateTime();
-
+    public static String formatTimestamp(Timestamp timestamp) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String formattedDateTime = localDateTime.format(formatter);
-
-        LocalDateTime parsedDateTime = LocalDateTime.parse(formattedDateTime, formatter);
-
-        return Timestamp.valueOf(parsedDateTime);
-    }
-
-    public static String getCurrentDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return now.format(formatter);
+        return timestamp.toLocalDateTime().format(formatter);
     }
 
     public static Timestamp getCurrentTimestamp() {

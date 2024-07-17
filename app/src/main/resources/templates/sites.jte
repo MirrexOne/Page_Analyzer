@@ -1,4 +1,5 @@
 @import hexlet.code.dto.urls.UrlsPage
+@import hexlet.code.util.Utils
 @param UrlsPage page
 
 @template.root(
@@ -27,7 +28,7 @@ content = @`
                         <a>${url.getName()}</a>
                     </td>
                     <td>
-                        ${String.valueOf(url.getCreatedAt())}
+                        ${Utils.formatTimestamp(url.getCreatedAt())}
                     </td>
                     <td>
 
