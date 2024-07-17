@@ -6,7 +6,9 @@ import hexlet.code.repository.UrlRepository;
 import hexlet.code.rout.NamedRoutes;
 import hexlet.code.util.Utils;
 import io.javalin.http.Context;
+import io.javalin.validation.ValidationException;
 
+import static hexlet.code.repository.UrlRepository.findByName;
 import static io.javalin.rendering.template.TemplateUtil.model;
 
 import java.net.MalformedURLException;
@@ -30,18 +32,21 @@ public class UrlController {
         context.render("sites.jte", model("page", urlsPage));
     }
 
-    public static void create(Context context) throws SQLException, MalformedURLException, URISyntaxException {
+    public static void create(Context context) throws URISyntaxException {
 
         try {
-            String urlName = context.formParamAsClass("url", String.class).get();
+            String urlName = context.formParamAsClass("url", String.class)
+                    .check(url ->
+                            findByName(url).get().getName().equals(url), "Страница уже существует")
+                    .get();
             URI uri = new URL(urlName).toURI();
-            Url url = new Url(Utils.formatURL(urlName));
+            Url url = new Url();
             UrlRepository.save(url);
             context.sessionAttribute("flash", "Page successfully added");
             context.sessionAttribute("flash-type", "success");
             context.redirect(NamedRoutes.pathToSites());
 
-        } catch (MalformedURLException e) {
+        } catch (SQLException | URISyntaxException | MalformedURLException e) {
             context.redirect(NamedRoutes.pathToSites());
         }
     }
