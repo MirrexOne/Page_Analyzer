@@ -6,6 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -47,5 +51,10 @@ public class Utils {
     public static Timestamp getCurrentTimestamp() {
         LocalDateTime now = LocalDateTime.now();
         return Timestamp.valueOf(now);
+    }
+
+    public static String formatURL(String url) throws MalformedURLException, URISyntaxException {
+        URI originURI = new URL(url).toURI();
+        return String.format("%s://%s", originURI.getScheme(), originURI.getAuthority());
     }
 }
