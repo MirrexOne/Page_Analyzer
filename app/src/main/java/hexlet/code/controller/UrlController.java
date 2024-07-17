@@ -1,27 +1,26 @@
 package hexlet.code.controller;
 
+import hexlet.code.dto.HomePage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.rout.NamedRoutes;
-import hexlet.code.util.Utils;
 import io.javalin.http.Context;
-import io.javalin.validation.ValidationException;
 
-import static hexlet.code.repository.UrlRepository.findByName;
-import static io.javalin.rendering.template.TemplateUtil.model;
-
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URI;
 import java.sql.SQLException;
 import java.util.List;
+
+import static hexlet.code.util.Utils.formatUrl;
+import static io.javalin.rendering.template.TemplateUtil.model;
 
 public class UrlController {
 
     public static void root(Context context) {
-        context.render("search.jte");
+        HomePage page = new HomePage();
+        page.setFlash(context.consumeSessionAttribute("flash"));
+        page.setFlashType(context.consumeSessionAttribute("flash-type"));
+        context.render("search.jte", model("page", page));
     }
 
     public static void showAll(Context context) throws SQLException {
@@ -32,22 +31,33 @@ public class UrlController {
         context.render("sites.jte", model("page", urlsPage));
     }
 
-    public static void create(Context context) throws URISyntaxException {
+    public static void create(Context context) throws SQLException {
+        String initialUrl = context.formParam("url");
+        URL validatedUrl;
 
         try {
-            String urlName = context.formParamAsClass("url", String.class)
-                    .check(url ->
-                            findByName(url).get().getName().equals(url), "Страница уже существует")
-                    .get();
-            URI uri = new URL(urlName).toURI();
-            Url url = new Url();
-            UrlRepository.save(url);
-            context.sessionAttribute("flash", "Page successfully added");
-            context.sessionAttribute("flash-type", "success");
-            context.redirect(NamedRoutes.pathToSites());
-
-        } catch (SQLException | URISyntaxException | MalformedURLException e) {
-            context.redirect(NamedRoutes.pathToSites());
+            validatedUrl = new URL(initialUrl);
+        } catch (Exception exception) {
+            context.sessionAttribute("flash", "Incorrect URL");
+            context.sessionAttribute("flash-type", "danger");
+            context.redirect(NamedRoutes.rootPath());
+            return;
         }
+
+        String formattedUrl = formatUrl(validatedUrl);
+
+        Url url = UrlRepository.findByName(formattedUrl).orElse(null);
+
+        if (url != null) {
+            context.sessionAttribute("flash", "Page already exists");
+            context.sessionAttribute("flash-type", "info");
+        } else {
+            Url newUrl = new Url(formattedUrl);
+            UrlRepository.save(newUrl);
+            context.sessionAttribute("flash", "Страница успешно добавлена");
+            context.sessionAttribute("flash-type", "success");
+        }
+
+        context.redirect(NamedRoutes.pathToSites());
     }
 }

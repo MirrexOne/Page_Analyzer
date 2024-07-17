@@ -9,4 +9,11 @@ public class NamedRoutes {
     public static String pathToSites() {
         return "/urls";
     }
+
+    public static String pathToSite(Long id) {
+        return pathToSite(String.valueOf(id));
+    }
+    public static String pathToSite(String id) {
+        return "/urls/" + id;
+    }
 }

@@ -3,6 +3,7 @@
 @param UrlsPage page
 
 @template.root(
+page = page,
 content = @`
     <section>
 

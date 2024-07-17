@@ -53,8 +53,7 @@ public class Utils {
         return Timestamp.valueOf(now);
     }
 
-    public static String formatURL(String url) throws MalformedURLException, URISyntaxException {
-        URI originURI = new URL(url).toURI();
-        return String.format("%s://%s", originURI.getScheme(), originURI.getAuthority());
+    public static String formatUrl(URL url) {
+        return String.format("%s://%s", url.getProtocol(), url.getAuthority());
     }
 }
