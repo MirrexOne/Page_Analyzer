@@ -1,4 +1,5 @@
 @import hexlet.code.dto.urls.UrlsPage
+@import hexlet.code.rout.NamedRoutes
 @import hexlet.code.util.Utils
 @param UrlsPage page
 
@@ -26,7 +27,7 @@ content = @`
                         ${url.getId()}
                     </td>
                     <td>
-                        <a>${url.getName()}</a>
+                        <a href="${NamedRoutes.pathToSite(url.getId())}">${url.getName()}</a>
                     </td>
                     <td>
                         ${Utils.formatTimestamp(url.getCreatedAt())}
