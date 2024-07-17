@@ -4,9 +4,15 @@ import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.rout.NamedRoutes;
+import hexlet.code.util.Utils;
 import io.javalin.http.Context;
+
 import static io.javalin.rendering.template.TemplateUtil.model;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URI;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,14 +30,19 @@ public class UrlController {
         context.render("sites.jte", model("page", urlsPage));
     }
 
-    public static void create(Context context) throws SQLException {
+    public static void create(Context context) throws SQLException, MalformedURLException, URISyntaxException {
 
-            String name = context.formParamAsClass("url", String.class).get();
-            Url url = new Url(name);
+        try {
+            String urlName = context.formParamAsClass("url", String.class).get();
+            URI uri = new URL(urlName).toURI();
+            Url url = new Url(Utils.formatURL(urlName));
             UrlRepository.save(url);
             context.sessionAttribute("flash", "Page successfully added");
             context.sessionAttribute("flash-type", "success");
             context.redirect(NamedRoutes.pathToSites());
 
+        } catch (MalformedURLException e) {
+            context.redirect(NamedRoutes.pathToSites());
+        }
     }
 }
