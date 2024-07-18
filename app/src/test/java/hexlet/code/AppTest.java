@@ -24,5 +24,20 @@ public class AppTest {
         }));
     }
 
+    @Test
+    public void testWebSitesPage() {
+        JavalinTest.test(app, ((server, client) -> {
+            var response = client.get("/urls");
+            assertThat(response.code()).isEqualTo(200);
+        }));
+    }
+
+    @Test
+    public void testUrlNotFound() {
+        JavalinTest.test(app, ((server, client) -> {
+            var response = client.get("/urls/7777777");
+            assertThat(response.code()).isEqualTo(404);
+        }));
+    }
 
 }
