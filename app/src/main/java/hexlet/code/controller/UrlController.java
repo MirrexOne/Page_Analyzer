@@ -66,7 +66,7 @@ public class UrlController {
         } else {
             Url newUrl = new Url(formattedUrl);
             UrlRepository.save(newUrl);
-            context.sessionAttribute("flash", "Страница успешно добавлена");
+            context.sessionAttribute("flash", "Page successfully added");
             context.sessionAttribute("flash-type", "success");
         }
 

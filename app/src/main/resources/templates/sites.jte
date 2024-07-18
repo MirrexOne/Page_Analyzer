@@ -15,9 +15,9 @@ content = @`
                 <thead>
                 <tr>
                     <th class="col-1">ID</th>
-                    <th>Имя</th>
-                    <th class="col-2">Последняя проверка</th>
-                    <th class="col-1">Код ответа</th>
+                    <th>Name</th>
+                    <th class="col-2">Lash check</th>
+                    <th class="col-1">Response code</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@ content = @`
                         <a href="${NamedRoutes.pathToSite(url.getId())}">${url.getName()}</a>
                     </td>
                     <td>
-                        ${Utils.formatTimestamp(url.getCreatedAt())}
+
                     </td>
                     <td>
 
