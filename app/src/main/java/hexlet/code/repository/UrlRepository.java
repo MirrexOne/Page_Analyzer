@@ -1,8 +1,6 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
-import hexlet.code.util.Utils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

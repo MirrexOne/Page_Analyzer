@@ -12,6 +12,10 @@ public class UrlsPage extends BasePage {
         this.urls = urls;
     }
 
+    /**
+     * Get list of URL's.
+     * @return urls
+     */
     public List<Url> getUrls() {
         return urls;
     }

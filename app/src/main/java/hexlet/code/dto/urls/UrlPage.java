@@ -10,6 +10,10 @@ public class UrlPage extends BasePage {
         this.url = url;
     }
 
+    /**
+     * Get some URL.
+     * @return url
+     */
     public Url getUrl() {
         return url;
     }
