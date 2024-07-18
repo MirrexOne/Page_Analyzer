@@ -46,6 +46,16 @@ public class AppTest {
     }
 
     @Test
+    public void testSuccessRequest() throws SQLException {
+        Url newUrl = new Url("https://github.com");
+        UrlRepository.save(newUrl);
+        JavalinTest.test(app, ((server, client) -> {
+            Response response = client.get("/urls/" + newUrl.getId());
+            assertThat(response.code()).isEqualTo(200);
+        }));
+    }
+
+    @Test
     public void testSaveUrl() throws SQLException {
         String initialUrl = "https://github.com";
         JavalinTest.test(app, (server, client) -> {
