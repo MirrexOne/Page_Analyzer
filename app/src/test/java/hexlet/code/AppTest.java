@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,11 +60,12 @@ public class AppTest {
     public void testSaveUrl() throws SQLException {
         String initialUrl = "https://github.com";
         JavalinTest.test(app, (server, client) -> {
-            var requestBody = "url=" + initialUrl;
-            var response = client.post("/urls", requestBody);
-            assertThat(response.code()).isEqualTo(200);
+            String requestBody = "url=" + initialUrl;
+            try (Response response = client.post("/urls", requestBody)) {
+                assertThat(response.code()).isEqualTo(200);
+            }
         });
         Url url = UrlRepository.findByName(initialUrl).isPresent() ? UrlRepository.findByName(initialUrl).get() : null;
-        assertThat(url.getName()).isEqualTo(initialUrl);
+        assertThat(Objects.requireNonNull(url).getName()).isEqualTo(initialUrl);
     }
 }
