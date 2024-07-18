@@ -1,9 +1,11 @@
 @import hexlet.code.dto.urls.UrlPage
 @import hexlet.code.rout.NamedRoutes
+@import hexlet.code.util.Utils
 @import static hexlet.code.util.Utils.formatTimestamp
 @param UrlPage page
 
 @template.root(
+page = page,
 content = @`
     <div class="container-lg mt-5">
         <h1>Website: ${page.getUrl().getName()}</h1>
@@ -26,7 +28,7 @@ content = @`
         </table>
 
         <h2 class="mt-5">Checks</h2>
-        <form method="post" action="">
+        <form method="post" action="${NamedRoutes.pathToCheck(page.getUrl().getId())}">
             <button type="submit" class="btn btn-primary">Run check</button>
         </form>
 
@@ -40,28 +42,28 @@ content = @`
             <th class="col-2">Date of check</th>
             </thead>
             <tbody>
-
-            <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-
+            @for(var check : page.getUrlCheckups())
+                <tr>
+                    <td>
+                        ${check.getId()}
+                    </td>
+                    <td>
+                        ${check.getStatusCode()}
+                    </td>
+                    <td>
+                        ${check.getTitle()}
+                    </td>
+                    <td>
+                        ${check.getH1()}
+                    </td>
+                    <td>
+                        ${check.getDescription()}
+                    </td>
+                    <td>
+                        ${Utils.formatTimestamp(check.getCreatedAt())}
+                    </td>
+                </tr>
+            @endfor
             </tbody>
         </table>
     </div>

@@ -5,9 +5,13 @@ import hexlet.code.repository.UrlRepository;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import okhttp3.Response;
+import okhttp3.mockwebserver.MockWebServer;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -15,7 +19,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
 
-    Javalin app;
+    private static Javalin app;
+    private static MockWebServer mockWebServer;
+
+    @BeforeAll
+    public static void beforeAll() throws IOException {
+        mockWebServer = new MockWebServer();
+        mockWebServer.start();
+    }
+
+    @AfterAll
+    public static void afterAll() throws IOException {
+        mockWebServer.shutdown();
+    }
 
     @BeforeEach
     public final void setApp() throws Exception {
@@ -57,7 +73,7 @@ public class AppTest {
     }
 
     @Test
-    public void testSaveUrl() throws SQLException {
+    public void testSavedUrl() throws SQLException {
         String initialUrl = "https://github.com";
         JavalinTest.test(app, (server, client) -> {
             String requestBody = "url=" + initialUrl;

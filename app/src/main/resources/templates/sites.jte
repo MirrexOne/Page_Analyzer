@@ -9,7 +9,7 @@ content = @`
     <section>
 
         <div class="container-lg mt-5">
-            <h1>Сайты</h1>
+            <h1>Websites</h1>
 
             <table class="table table-bordered table-hover mt-3">
                 <thead>
@@ -22,6 +22,7 @@ content = @`
                 </thead>
                 <tbody>
                 @for(var url : page.getUrls())
+                !{var check = page.getLatestCheckups().get(url.getId());}
                 <tr>
                     <td>
                         ${url.getId()}
@@ -30,10 +31,10 @@ content = @`
                         <a href="${NamedRoutes.pathToSite(url.getId())}">${url.getName()}</a>
                     </td>
                     <td>
-
+                        ${check == null ? "" : Utils.formatTimestamp(check.getCreatedAt())}
                     </td>
                     <td>
-
+                        ${check == null ? "" : String.valueOf(check.getStatusCode())}
                     </td>
 
                 </tr>

@@ -60,6 +60,7 @@ public class App {
         app.post(NamedRoutes.pathToSites(), UrlController::create);
         app.get(NamedRoutes.rootPath(), UrlController::root);
         app.get(NamedRoutes.pathToSite("{id}"), UrlController::show);
+        app.post(NamedRoutes.pathToCheck("{id}"), UrlController::checkUrl);
 
         return app;
     }

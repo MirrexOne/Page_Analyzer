@@ -16,4 +16,12 @@ public class NamedRoutes {
     public static String pathToSite(String id) {
         return "/urls/" + id;
     }
+
+    public static String pathToCheck(Long id) {
+        return pathToCheck(String.valueOf(id));
+    }
+
+    public static String pathToCheck(String id) {
+        return "/urls/" + id + "/checks";
+    }
 }
