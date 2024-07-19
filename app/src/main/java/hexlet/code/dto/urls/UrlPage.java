@@ -7,6 +7,7 @@ import hexlet.code.model.UrlCheck;
 import java.util.List;
 
 public class UrlPage extends BasePage {
+
     private final Url url;
     private List<UrlCheck> urlCheckups;
 
@@ -15,18 +16,10 @@ public class UrlPage extends BasePage {
         this.urlCheckups = urlCheckups;
     }
 
-    /**
-     * Get some URL.
-     * @return url
-     */
     public Url getUrl() {
         return url;
     }
 
-    /**
-     * Get all checkups.
-     * @return checkups list
-     */
     public List<UrlCheck> getUrlCheckups() {
         return urlCheckups;
     }

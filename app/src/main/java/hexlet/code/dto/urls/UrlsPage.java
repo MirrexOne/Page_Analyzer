@@ -7,7 +7,8 @@ import hexlet.code.model.UrlCheck;
 import java.util.List;
 import java.util.Map;
 
-public final class UrlsPage extends BasePage {
+public class UrlsPage extends BasePage {
+
     private final List<Url> urls;
     private Map<Long, UrlCheck> latestCheckups;
 
