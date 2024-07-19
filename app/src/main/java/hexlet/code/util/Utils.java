@@ -50,6 +50,8 @@ public class Utils {
     }
 
     public static String formatUrl(URL url) {
-        return String.format("%s://%s", url.getProtocol(), url.getAuthority());
+        String authority = url.getAuthority() == null ? "" : url.getAuthority();
+        String protocol = url.getProtocol();
+        return String.format("%s://%s", protocol, authority);
     }
 }
