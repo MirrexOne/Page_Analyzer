@@ -17,4 +17,4 @@ Once the verification is complete, you will have access to the following paramet
 - h1
 - Description
 
-According to these parameters you can estimate websites for SEO suitability.
+You can use these parameters to evaluate sites for SEO suitability.
