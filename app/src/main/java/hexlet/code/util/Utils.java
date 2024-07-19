@@ -54,4 +54,11 @@ public class Utils {
         String protocol = url.getProtocol();
         return String.format("%s://%s", protocol, authority);
     }
+
+    public static String removeTrailingSlash(String input) {
+        if (input != null && input.endsWith("/")) {
+            return input.replaceAll("/$", "");
+        }
+        return input;
+    }
 }

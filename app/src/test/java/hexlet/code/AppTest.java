@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import static hexlet.code.util.Utils.removeTrailingSlash;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
@@ -58,7 +59,7 @@ public class AppTest {
 
     @Test
     public void testWebRequests() {
-        String initialUrl = mockWebServer.url("/").toString().replaceAll("/$", "");
+        String initialUrl = removeTrailingSlash(mockWebServer.url("/").toString());
         JavalinTest.test(app, (server, client) -> {
             String requestAttribute = "url=" + initialUrl;
             assertThat(client.post(NamedRoutes.pathToSites(), requestAttribute).code()).isEqualTo(200);
