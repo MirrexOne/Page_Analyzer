@@ -10,8 +10,8 @@
 
 ## Description
 
-This web application will help you to check any websites or resources.  
-After copmleted check you will give access to following parametrs:
+This web application will help you to check any websites or resources.
+Once the verification is complete, you will have access to the following parameters:
 - Response code
 - Title
 - h1
