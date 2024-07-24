@@ -8,8 +8,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -45,8 +49,8 @@ public class Utils {
     }
 
     public static Timestamp getCurrentTimestamp() {
-        LocalDateTime now = LocalDateTime.now();
-        return Timestamp.valueOf(now);
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Europe/Moscow"));
+        return Timestamp.valueOf(localDateTime);
     }
 
     public static String formatUrl(URL url) {
