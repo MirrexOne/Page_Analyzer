@@ -1,5 +1,6 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/MirrexOne/java-project-72/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/MirrexOne/java-project-72/actions)
+
+<!--- ### Hexlet tests and linter status:
+[![Actions Status](https://github.com/MirrexOne/java-project-72/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/MirrexOne/java-project-72/actions) --->
 
 ### Maintainability:
 [![Project build check](https://github.com/MirrexOne/java-project-72/actions/workflows/main.yml/badge.svg)](https://github.com/MirrexOne/java-project-72/actions)
